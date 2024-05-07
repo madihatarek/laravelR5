@@ -1,10 +1,3 @@
-<?php
-if ($_SERVER['REQUEST_METHOD'] === "POST") {
-    $Fname=$_POST['fname'];
-    $Lname= $_POST['lname']; 
-}
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,9 +8,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 <body>
     <h1>Data Received Sucessfully...</h1>
     <br>
-    <h3>My First Name is: <?php echo $Fname?></h3>
+    <h3>My First Name is: {{ $fname }}</h3>
     <br>
-    <h3>My Last Name is: <?php echo $Lname?></h3>
+     <h3>My Last Name is: {{ $lname }}</h3>
 
 </body>
 </html>

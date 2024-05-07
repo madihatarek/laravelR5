@@ -2,6 +2,23 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MyController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\StudentController;
+
+Route::post('insertStudent',[StudentController::class,'store'])->name("insertStudent");
+
+Route::get('addStudent',[StudentController::class,'create']);
+
+
+Route::post('insertClient',[ClientController::class,'store'])->name("insertClient");
+
+Route::get('addClient',[ClientController::class,'create']);
+
+
+
+
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -74,15 +91,21 @@ Route::get('test',function(){
 
 
 //form to get data
+// first formLogin ===> URL name
+// second formLogin ====> view form.
 Route::get('formLogin',function(){
     return view('formLogin');
 });
 
 
-// receive data from method post....
-Route::post('receiveForm',function(){
-    return view('receiveForm');
-})->name('receiveForm');
+
 
 ////////////////////////////////////////
-Route::get('test11',[MyController::class,'my_data']);
+// Route::get('test1',[MyController::class,'my_data']);
+
+///////////////////////////////////////////////////////////////
+
+// first receiveData ===> URL name
+// second receiveData ====> function name in  MyController class to use this func.
+// receiveForm ===> send data to this page...
+Route::post('receiveData',[MyController::class,'receiveData'])->name('receiveForm');
