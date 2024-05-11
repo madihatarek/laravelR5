@@ -7,12 +7,15 @@ use App\Models\Student;
 
 class studentController extends Controller
 {
+    private $items = ['studentName' , 'age'];
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $students = Student::get();
+        return view('students', compact('students'));
     }
 
     /**
@@ -29,11 +32,15 @@ class studentController extends Controller
      */
     public function store(Request $request)
     {
-        $student = new Student();
-        $student->studentName = $request->studentName;
-        $student->age = $request->age;
-        $student->save();
-        return "inserted Student Successfully";
+        // $student = new Student();
+        // $student->studentName = $request->studentName;
+        // $student->age = $request->age;
+        // $student->save();
+        // return "inserted Student Successfully";
+
+        // second way to insert...
+        Student::create($request->only($this->items));
+        return redirect('students');
     }
 
     /**

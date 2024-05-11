@@ -6,13 +6,14 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\StudentController;
 
 Route::post('insertStudent',[StudentController::class,'store'])->name("insertStudent");
-
-Route::get('addStudent',[StudentController::class,'create']);
+Route::get('addStudent',[StudentController::class,'create'])->name('addStudent');
+Route::get('students',[StudentController::class,'index'])->name("students");
 
 
 Route::post('insertClient',[ClientController::class,'store'])->name("insertClient");
+Route::get('addClient',[ClientController::class,'create'])->name("addClient");
+Route::get('clients',[ClientController::class,'index'])->name("clients");
 
-Route::get('addClient',[ClientController::class,'create']);
 
 
 
