@@ -8,9 +8,10 @@
                 <a class="navbar-brand" href="#">Clients</a>
             </div>
             <ul class="nav navbar-nav">
-                <li class="{{ Route::is('addClient') ? 'active' : '' }}"><a href="{{ route('addClient') }}">Add</a></li>                
                 <li class="{{ Route::is('clients') ? 'active' : '' }}"><a href="{{ route('clients') }}">Clients</a></li>
-                <li><a href="#">Page 3</a></li>
+                <li class="{{ Route::is('addClient') ? 'active' : '' }}"><a href="{{ route('addClient') }}">Add Client</a></li>
+                {{-- <li class="{{ Route::is('editClient') ? 'active' : '' }}"><a href="{{ route('editClient') }}">Edit Client</a></li>                 --}}
+                {{-- <li><a href="#">Page 3</a></li> --}}
             </ul>
         </div>
     </nav>

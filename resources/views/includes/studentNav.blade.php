@@ -8,7 +8,7 @@
                 <a class="navbar-brand" href="#">Students</a>
             </div>
             <ul class="nav navbar-nav">
-                <li class="{{ Route::is('addStudent') ? 'active' : '' }}"><a href="{{ route('addStudent') }}">Add</a></li>                
+                <li class="{{ Route::is('addStudent') ? 'active' : '' }}"><a href="{{ route('addStudent') }}">Add Student</a></li>                
                 <li class="{{ Route::is('students') ? 'active' : '' }}"><a href="{{ route('students') }}">Students</a></li>
                 {{-- <li><a href="#">Page 3</a></li> --}}
             </ul>

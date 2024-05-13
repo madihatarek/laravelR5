@@ -8,11 +8,23 @@ use App\Http\Controllers\StudentController;
 Route::post('insertStudent',[StudentController::class,'store'])->name("insertStudent");
 Route::get('addStudent',[StudentController::class,'create'])->name('addStudent');
 Route::get('students',[StudentController::class,'index'])->name("students");
+Route::get('editStudent/{id}',[StudentController::class,'edit'])->name("editStudent"); //show edit form page...
+Route::put('updateStudent/{id}', [StudentController::class,'update'])->name('updateStudent');
+Route::get('showStudent/{id}',[StudentController::class,'show'])->name("showStudent"); 
+Route::delete('deleteStudent',[StudentController::class,'destroy'])->name("deleteStudent");
 
 
-Route::post('insertClient',[ClientController::class,'store'])->name("insertClient");
-Route::get('addClient',[ClientController::class,'create'])->name("addClient");
+
+Route::post('insertClient',[ClientController::class,'store'])->name("insertClient"); // insert the variables in database...
+Route::get('addClient',[ClientController::class,'create'])->name("addClient"); //show add form page...
 Route::get('clients',[ClientController::class,'index'])->name("clients");
+Route::get('editClient/{id}',[ClientController::class,'edit'])->name("editClient"); //show edit form page...
+Route::put('updateClient/{id}', [ClientController::class,'update'])->name('updateClient');
+Route::get('showClient/{id}',[ClientController::class,'show'])->name("showClient"); 
+Route::delete('deleteClient',[ClientController::class,'destroy'])->name("deleteClient"); 
+
+
+
 
 
 

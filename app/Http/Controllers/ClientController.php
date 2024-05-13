@@ -43,7 +43,9 @@ class ClientController extends Controller
         
         //second way to insert.... advanced way.
         Client::create($request->only($this->colums));
-        return redirect('clients');
+        // return redirect('clients');
+        return redirect('clients')->with('success','Inserted Successfully');
+
 
 
     }
@@ -53,15 +55,18 @@ class ClientController extends Controller
      */
     public function show(string $id)
     {
-        //
+        
+        $client = Client::findOrFail($id);
+        return view('showClient', compact('client'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id)  //string $id
     {
-        //
+        $client = Client::findOrFail($id);
+        return view('editClient', compact('client'));
     }
 
     /**
@@ -69,14 +74,19 @@ class ClientController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        Client::where('id', $id)->update($request->only($this->colums));
+        return redirect('clients')->with('success','Updated Successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->id;
+        Client::where('id',$id)->delete();
+        // return redirect('clients');
+        return redirect('clients')->with('success','Deleted Successfully');
+
     }
 }
