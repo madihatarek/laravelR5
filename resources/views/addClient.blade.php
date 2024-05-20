@@ -19,20 +19,20 @@
             @csrf
             <div class="form-group">
                 <label for="clientName">Client Name:</label>
-                <input type="clientName" class="form-control" id="clientName" placeholder="Enter Client Name"
+                <input type="clientName" class="form-control" required id="clientName" placeholder="Enter Client Name"
                     name="clientName">
             </div>
             <div class="form-group">
                 <label for="phone">Client Phone:</label>
-                <input type="phone" class="form-control" id="phone" placeholder="Enter Phone" name="phone">
+                <input type="phone" class="form-control" required id="phone" placeholder="Enter Phone" name="phone">
             </div>
             <div class="form-group">
                 <label for="email">Client Email:</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter Email" name="email">
+                <input type="email" class="form-control" required id="email" placeholder="Enter Email" name="email">
             </div>
             <div class="form-group">
                 <label for="website">Client Website:</label>
-                <input type="website" class="form-control" id="website" placeholder="Enter Website" name="website">
+                <input type="website" class="form-control" required id="website" placeholder="Enter Website" name="website">
             </div>
             <div class="checkbox">
                 <label><input type="checkbox" name="remember"> Remember me</label>

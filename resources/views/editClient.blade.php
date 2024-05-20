@@ -20,22 +20,22 @@
             @method('put')
             <div class="form-group">
                 <label for="clientName">Client Name:</label>
-                <input type="clientName" class="form-control" id="clientName" placeholder="Enter Client Name"
+                <input type="clientName" class="form-control" id="clientName" required placeholder="Enter Client Name"
                     name="clientName" value="{{ $client->clientName }}">
             </div>
             <div class="form-group">
                 <label for="phone">Client Phone:</label>
-                <input type="phone" class="form-control" id="phone" placeholder="Enter Phone" name="phone"
+                <input type="phone" class="form-control" id="phone" required placeholder="Enter Phone" name="phone"
                 value="{{ $client->phone }}" >
             </div>
             <div class="form-group">
                 <label for="email">Client Email:</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter Email" name="email"
+                <input type="email" class="form-control" id="email" required placeholder="Enter Email" name="email"
                 value="{{ $client->email }}">
             </div>
             <div class="form-group">
                 <label for="website">Client Website:</label>
-                <input type="website" class="form-control" id="website" placeholder="Enter Website" name="website"
+                <input type="website" class="form-control" id="website" required placeholder="Enter Website" name="website"
                 value="{{ $client->website }}">
             </div>
             <div class="checkbox">

@@ -19,12 +19,12 @@
             @method('put')
             <div class="form-group">
                 <label for="studentName">Student Name:</label>
-                <input type="studentName" class="form-control" id="studentName" placeholder="Enter Student Name"
+                <input type="studentName" class="form-control" required id="studentName" placeholder="Enter Student Name"
                     name="studentName" value="{{ $student->studentName }}">
             </div>
             <div class="form-group">
                 <label for="age">Student age:</label>
-                <input type="age" class="form-control" id="age" placeholder="Enter age" name="age"
+                <input type="age" class="form-control" required id="age" placeholder="Enter age" name="age"
                 value="{{ $student->age }}">
             </div>
             <button type="submit" class="btn btn-default">Submit</button>

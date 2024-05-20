@@ -78,10 +78,11 @@ class studentController extends Controller {
 
     public function update( Request $request, string $id ) {
         // using Query Builder....
-        $student = [
-            'studentName' => $request->input( 'studentName' ),
-            'age' => $request->input( 'age' )
-        ];
+        // $student = [
+        //     'studentName' => $request->input( 'studentName' ),
+        //     'age' => $request->input( 'age' )
+        // ];
+        $student =$request->only($this->items);
         DB::table( 'students' )->where( 'id', $id )->update( $student );
         return redirect( 'students' )->with( 'success', 'Updated Successfully' );
     }
