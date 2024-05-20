@@ -47,10 +47,17 @@ class studentController extends Controller {
         //     'studentName' => $request->input( 'studentName' )
         //, 'age' => $request->input( 'age' )
         // ];
-        DB::table( 'students' )->insert( [
-            'studentName' => $request->input( 'studentName' )
-            , 'age' => $request->input( 'age' )
+        // DB::table( 'students' )->insert( [
+        //     'studentName' => $request->input( 'studentName' )
+        //, 'age' => $request->input( 'age' )
+        // ] );
+
+        //validation.......................
+        $data = $request->validate( [
+            'studentName' => 'required|max:100|min:5',
+            'age' => 'required|max:3',
         ] );
+        DB::table('students')->insert($data);
         return redirect( 'students' )->with( 'success', 'Inserted Successfully' );
     }
 
@@ -82,8 +89,11 @@ class studentController extends Controller {
         //     'studentName' => $request->input( 'studentName' ),
         //     'age' => $request->input( 'age' )
         // ];
-        $student =$request->only($this->items);
-        DB::table( 'students' )->where( 'id', $id )->update( $student );
+        $studentData = $request->validate([
+            'studentName' => 'required|max:100|min:5',
+            'age' => 'required|max:3',
+        ]);
+        DB::table( 'students' )->where( 'id', $id )->update( $studentData );
         return redirect( 'students' )->with( 'success', 'Updated Successfully' );
     }
 
@@ -93,7 +103,41 @@ class studentController extends Controller {
 
     public function destroy( Request $request ) {
         $id = $request->id;
-        DB::table( 'students' )->where( 'id', $id )->delete();
+        Student::where( 'id', $id )->delete();
+        // DB::table( 'students' )->where( 'id', $id )->delete();
         return redirect( 'students' )->with( 'success', 'Deleted Successfully' );
+    }
+
+    /**
+    *  Move To Trashed
+    */
+
+    public function trash() {
+        // $trashed = DB::table( 'students' )->onlyTrashed()->get();
+        // return view( 'trashStudent', compact( 'trashed' ) );
+
+        $trashed = Student::onlyTrashed()->get();
+        return view( 'trashStudent', compact( 'trashed' ) );
+    }
+
+    /**
+    * Restore data from trashed.
+    */
+
+    public function restore( string $id ) {
+        Student::where( 'id', $id )->restore();
+        return redirect( 'students' )->with( 'success', 'Restored data Successfully' );
+
+    }
+
+    /**
+    * Remove the specified resource from storage forever force Delete
+    */
+
+    public function forceDelete( Request $request ) {
+        $id = $request->id;
+        Student::where( 'id', $id )->forceDelete();
+        return redirect( 'trashStudent' )->with( 'success', 'Deleted all data Successfully' );
+
     }
 }

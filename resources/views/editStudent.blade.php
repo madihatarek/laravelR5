@@ -19,13 +19,23 @@
             @method('put')
             <div class="form-group">
                 <label for="studentName">Student Name:</label>
-                <input type="studentName" class="form-control" required id="studentName" placeholder="Enter Student Name"
+                <input type="studentName" class="form-control"  id="studentName" placeholder="Enter Student Name"
                     name="studentName" value="{{ $student->studentName }}">
+                    <p style="color: rgb(247, 17, 17)">
+                        @error('studentName')
+                            {{ $message }}
+                        @enderror
+                    </p>
             </div>
             <div class="form-group">
                 <label for="age">Student age:</label>
-                <input type="age" class="form-control" required id="age" placeholder="Enter age" name="age"
+                <input type="age" class="form-control"  id="age" placeholder="Enter age" name="age"
                 value="{{ $student->age }}">
+                <p style="color: rgb(247, 17, 17)">
+                    @error('age')
+                        {{ $message }}
+                    @enderror
+                </p>
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
         </form>

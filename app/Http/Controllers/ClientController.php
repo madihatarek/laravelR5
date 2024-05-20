@@ -9,6 +9,9 @@ class ClientController extends Controller
 {
     private $colums = ['clientName','phone',
      'email', 'website'];
+
+     
+
     /**
      * Display a listing of the resource.
      */
@@ -42,8 +45,17 @@ class ClientController extends Controller
         // // return view('clients');
         
         //second way to insert.... advanced way.
-        Client::create($request->only($this->colums));
-        // return redirect('clients');
+        // Client::create($request->only($this->colums));
+        // return redirect('clients')->with('success','Inserted Successfully');
+
+        $data = $request->validate([
+            'clientName' => 'required|max:100|min:5',
+            'phone' => 'required|min:11',
+            'email' => 'required|email:rfc',
+            'website' =>'required',
+        ]);
+
+         Client::create($data);
         return redirect('clients')->with('success','Inserted Successfully');
 
 
@@ -74,7 +86,17 @@ class ClientController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        Client::where('id', $id)->update($request->only($this->colums));
+
+        // Client::where('id', $id)->update($request->only($this->colums));
+        // return redirect('clients')->with('success','Updated Successfully');
+
+        $data = $request->validate([
+            'clientName' => 'required|max:100|min:5',
+            'phone' => 'required|min:11',
+            'email' => 'required|email:rfc',
+            'website' =>'required',
+        ]);
+        Client::where('id', $id)->update($data);
         return redirect('clients')->with('success','Updated Successfully');
     }
 
@@ -86,7 +108,46 @@ class ClientController extends Controller
         $id = $request->id;
         Client::where('id',$id)->delete();
         // return redirect('clients');
-        return redirect('clients')->with('success','Deleted Successfully');
+        return redirect('clients')->with('success','Move to Trash Successfully');
 
     }
+
+
+    /**
+     *    Trash.
+     */
+    public function trash()
+    {
+        $trashed = Client::onlyTrashed()->get();
+        return view('trashClient' , compact('trashed'));
+
+    }
+    
+    
+    /**
+     * Restore data from trashed.
+     */
+    public function restore(string $id)
+    {
+        Client::where('id',$id)->restore();
+        // return redirect('clients');
+        return redirect('clients')->with('success','Restored data Successfully');
+
+    }
+
+
+       /**
+     * Remove the specified resource from storage forever force Delete
+     */
+    public function forceDelete(Request $request)
+    {
+        $id = $request->id;
+        Client::where('id',$id)->forceDelete();
+        // return redirect('clients');
+        return redirect('trashClient')->with('success','Deleted all data Successfully');
+
+    }
+
+
+
 }
