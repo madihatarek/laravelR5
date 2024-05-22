@@ -57,7 +57,8 @@ class studentController extends Controller {
             'studentName' => 'required|max:100|min:5',
             'age' => 'required|max:3',
         ] );
-        DB::table('students')->insert($data);
+        // DB::table('students')->insert($data);
+        Student::create( $data );
         return redirect( 'students' )->with( 'success', 'Inserted Successfully' );
     }
 

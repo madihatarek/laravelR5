@@ -12,17 +12,19 @@
 
 <body>
 
-  @include('includes.clientNav');
-  <h2><strong>Client Name: </strong>{{ $client->clientName }}</h2>
-  <br>
-  <h3><strong>Client Phone: </strong>{{ $client->phone }}</h3>
-  <br>
-  <h3><strong>Client Email: </strong>{{ $client->email }}</h3>
-  <br>
-  <h3><strong>Client Website: </strong>{{ $client->website }}</h3>
-  <br>
-    
-      
+    @include('includes.clientNav');
+    <div class="container" style="margin-left: 30px">
+        <h2><strong>Client Name: </strong>{{ $client->clientName }}</h2>
+        <br>
+        <h3><strong>Client Phone: </strong>{{ $client->phone }}</h3>
+        <br>
+        <h3><strong>Client Email: </strong>{{ $client->email }}</h3>
+        <br>
+        <h3><strong>Client Website: </strong>{{ $client->website }}</h3>
+        <br>
+        <h4>client Photo</h4>
+        <p><img src="{{ asset('assets/images/' . $client->image) }}" alt="{{ $client->clientName }}"></p>
+    </div>
 
 </body>
 
