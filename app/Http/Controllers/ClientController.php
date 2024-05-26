@@ -7,8 +7,11 @@ use App\Models\Client;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
+use App\Traits\uploadFile;
 
 class ClientController extends Controller {
+    use uploadFile;
+
     private $colums = [ 'clientName', 'phone',
     'email', 'website' ];
 
@@ -53,10 +56,12 @@ class ClientController extends Controller {
         $message = $this->errMsg();
         $data =  $request->validate( $this->validateData(), $message );
 
-        $imgExt = $request->image->getClientOriginalExtension();
-        $fileName = time() . '.' . $imgExt;
-        $path = 'assets/images';
-        $request->image->move( $path, $fileName );
+        // $imgExt = $request->image->getClientOriginalExtension();
+        // $fileName = time() . '.' . $imgExt;
+        // $path = 'assets/images';
+        // $request->image->move( $path, $fileName );
+
+        $fileName = $this->upload($request->image , 'assets/images');
 
         $data[ 'image' ] = $fileName;
         $data[ 'active' ] = isset( $request->active );
@@ -92,6 +97,7 @@ class ClientController extends Controller {
     public function update( Request $request, string $id ) {
         // Client::where( 'id', $id )->update( $request->only( $this->colums ) );
         // return redirect( 'clients' )->with( 'success', 'Updated Successfully' );
+        // updated started.
         $message = $this->errMsg();
         $data = $request->validate( [
             'clientName' => 'required|max:100|min:5',
@@ -99,35 +105,36 @@ class ClientController extends Controller {
             'email' => 'required|email:rfc',
             'website' =>'required',
             'city' => 'required|max:30',
-            'image' => [ 'nullable', 'image', 'mimes:jpeg,png,jpg', 'min:10', 'max:12288',
+            'image' => [ 'nullable', 'image', 'mimes:jpeg,png,jpg', 'max:12288',
             Rule::dimensions()->maxWidth( 1000 )->maxHeight( 500 ) ],
         ], $message );
-
-        $existingImage = Client::find($id);
+        // to get old image from server and save it again....
+        $existingImage = Client::find( $id );
         $oldImage = $existingImage->image;
-
         if ( $request->hasFile( 'image' ) ) {
-            $imgExt = $request->image->getClientOriginalExtension();
-            $fileName = time() . '.' . $imgExt;
+            // $imgExt = $request->image->getClientOriginalExtension();
+            // $fileName = time() . '.' . $imgExt;
             $path = 'assets/images';
-            $request->image->move( $path, $fileName );
+            // $request->image->move( $path, $fileName );
+            $fileName = $this->upload($request->image , 'assets/images');
             $data[ 'image' ] = $fileName;
             // Delete the old image if it exists
             if ( $oldImage ) {
                 Storage::delete( $path . '/' . $oldImage );
             }
         } else {
-            $data['image'] = $oldImage;
+            // return old image in data and array again.
+            $data[ 'image' ] = $oldImage;
         }
         $data[ 'active' ] = isset( $request->active );
         Client::where( 'id', $id )->update( $data );
         return redirect( 'clients' )->with( 'success', 'Updated Successfully' );
+        // updated endded.
     }
 
     /**
     * Remove the specified resource from storage.
     */
-
     public function destroy( Request $request ) {
         $id = $request->id;
         Client::where( 'id', $id )->delete();
@@ -139,7 +146,6 @@ class ClientController extends Controller {
     /**
     *    Trash.
     */
-
     public function trash() {
         $trashed = Client::onlyTrashed()->get();
         return view( 'trashClient', compact( 'trashed' ) );
@@ -149,7 +155,6 @@ class ClientController extends Controller {
     /**
     * Restore data from trashed.
     */
-
     public function restore( string $id ) {
         Client::where( 'id', $id )->restore();
         // return redirect( 'clients' );
@@ -160,7 +165,6 @@ class ClientController extends Controller {
     /**
     * Remove the specified resource from storage forever force Delete
     */
-
     public function forceDelete( Request $request ) {
         $id = $request->id;
         Client::where( 'id', $id )->forceDelete();
@@ -190,11 +194,14 @@ class ClientController extends Controller {
             'email' => 'required|email:rfc',
             'website' =>'required',
             'city' => 'required|max:30',
-            'image' => [ 'required', 'image', 'min:10', 'max:12288',
+            'image' => [ 'required', 'image', 'mimes:jpeg,png,jpg','max:12288',
             Rule::dimensions()->maxWidth( 1000 )->maxHeight( 500 ) ],
 
         ];
 
     }
+
+    
+
 
 }
