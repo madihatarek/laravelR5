@@ -11,6 +11,8 @@
                 <li class="{{ Route::is('clients') ? 'active' : '' }}"><a href="{{ route('clients') }}">Clients</a></li>
                 <li class="{{ Route::is('addClient') ? 'active' : '' }}"><a href="{{ route('addClient') }}">Add Client</a></li>
                 <li class="{{ Route::is('trashClient') ? 'active' : '' }}"><a href="{{ route('trashClient') }}">Trash</a></li>
+                @yield('menu')
+                @stack('submenu')
             </ul>
         </div>
     </nav>

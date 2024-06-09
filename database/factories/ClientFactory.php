@@ -15,19 +15,20 @@ class ClientFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    protected $model = Client::class;
+    // protected $model = Client::class;
 
     public function definition(): array
     {
         return [
-            'clientName' => fake()->clientName(),
-            'phone' => fake()->phone(),
+            'clientName' => fake()->name(),
+            'phone' => fake()->phoneNumber(),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'website' => fake()->website(),
-            'city' => fake()->city(),
-            // 'active' => fake()->active(),
-            // 'image' => fake()->image(),
+            'website' => fake()->url(),
+            // 'city' => fake()->city(),
+            'city_id' => fake()->numberBetween(1,20),
+            'active' => fake()->numberBetween(0,1),
+            'address' => fake()->address(),
+            'image' => fake()->imageUrl(640, 480)
 
         ];
     }

@@ -32,7 +32,7 @@ Route::delete('forceDeleteClient',[ClientController::class,'forceDelete'])->name
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('stacked');
 });
 
 // madiha/id ====> is URL.....

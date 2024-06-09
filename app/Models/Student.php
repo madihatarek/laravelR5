@@ -12,5 +12,12 @@ class Student extends Model
     protected $fillable = [
         'studentName',
         'age',
+        // 'course_id',
     ];
+
+    public function courses()
+    {
+        return $this->belongsToMany(courses::class, 'student_course');
+    }
+
 }

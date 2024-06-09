@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
-            $table->string('clientName', 100); 	// varchar equivalent with a length
+            $table->string('clientName', 100);
             $table->string('phone', 25);
             $table->string('email', 100);
             $table->string('website', 100);
-            $table->string('city',30);
+            // $table->string('city', 30);
+            $table->foreignId('city_id')->constrained('cities');
+            $table->string('image', 100);
             $table->boolean('active');
-            $table->string('image',100);
             $table->softDeletes();
             $table->timestamps();
         });

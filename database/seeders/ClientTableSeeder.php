@@ -14,14 +14,15 @@ class ClientTableSeeder extends Seeder
      */
     public function run() : void
     {
-        Client::factory(10)->create();
+        // Client::factory(10)->create();
 
-        Client::factory()->create([
-            'clientName' => 'madiha arafa',
-            'phone' => '01243216533',
-            'email' => 'test12@example.com',
-            'website' => 'www.madiha.com',
-            'city' => 'Alex',
-        ]);
+        // Client::factory()->create([
+        //     'clientName' => 'madiha arafa',
+        //     'phone' => '01243216533',
+        //     'email' => 'test12@example.com',
+        //     'website' => 'www.madiha.com',
+        //     'city' => 'Alex',
+        //     a
+        // ]);
     }
 }

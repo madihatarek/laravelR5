@@ -22,6 +22,8 @@
         <br>
         <h3><strong>Client Website: </strong>{{ $client->website }}</h3>
         <br>
+        <h3><strong>Client City: </strong>{{ $client->city->city }}</h3>
+        <br>
         <h4>client Photo</h4>
         <p><img src="{{ asset('assets/images/' . $client->image) }}" alt="{{ $client->clientName }}"></p>
     </div>
