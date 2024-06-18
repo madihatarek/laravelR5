@@ -12,3 +12,4 @@ class City extends Model
         'city',
     ];
 }
+

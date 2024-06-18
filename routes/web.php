@@ -4,6 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MyController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\Mail;
+
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+
 
 Route::post('insertStudent',[StudentController::class,'store'])->name("insertStudent");
 Route::get('addStudent',[StudentController::class,'create'])->name('addStudent');
@@ -20,7 +28,7 @@ Route::delete('forceDeleteStudent',[StudentController::class,'forceDelete'])->na
 
 Route::post('insertClient',[ClientController::class,'store'])->name("insertClient"); // insert the variables in database...
 Route::get('addClient',[ClientController::class,'create'])->name("addClient"); //show add form page...
-Route::get('clients',[ClientController::class,'index'])->name("clients");
+Route::get('clients',[ClientController::class,'index'])->middleware('verified')->name("clients");
 Route::get('editClient/{id}',[ClientController::class,'edit'])->name("editClient"); //show edit form page...
 Route::put('updateClient/{id}', [ClientController::class,'update'])->name('updateClient');
 Route::get('showClient/{id}',[ClientController::class,'show'])->name("showClient"); 
@@ -31,9 +39,11 @@ Route::delete('forceDeleteClient',[ClientController::class,'forceDelete'])->name
 
 
 
-Route::get('/', function () {
-    return view('stacked');
-});
+// Route::get('/', function () {
+//     return view('stacked');
+// });
+
+
 
 // madiha/id ====> is URL.....
 // Route::get('madiha/{id?}', function($id = 0){
@@ -112,7 +122,10 @@ Route::get('formLogin',function(){
 
 
 ////////////////////////////////////////
-// Route::get('test1',[MyController::class,'my_data']);
+Route::get('mySession',[MyController::class,'myVal']);
+Route::get('restoreSession',[MyController::class,'restoreVal']);
+Route::get('deleteSession',[MyController::class,'deleteVal']);
+Route::get('sendClientMail',[MyController::class,'sendClientMail']);
 
 ///////////////////////////////////////////////////////////////
 
@@ -120,3 +133,6 @@ Route::get('formLogin',function(){
 // second receiveData ====> function name in  MyController class to use this func.
 // receiveForm ===> send data to this page...
 Route::post('receiveData',[MyController::class,'receiveData'])->name('receiveForm');
+Auth::routes(['verify' => true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
