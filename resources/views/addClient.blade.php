@@ -62,6 +62,10 @@
                 <label for="city">City:</label><br>
                 <select name="city" id="city" class="form-control">
                     <option value="">Please Select City</option>
+                        {{-- @foreach($city as $city)
+                            <option value="{{ $city['id'] }}" {{ old('city_id') == '{{ $city['id'] }}' ? 'selected' : '' }}>{{ $city['city'] }}</option>
+                        @endforeach --}}
+                   
                     <option value="Cairo"  {{ old('city') == 'Cairo' ? 'selected' : '' }}>Cairo</option>
                     <option value="Giza"  {{ old('city') == 'Giza' ? 'selected' : '' }}>Giza</option>
                     <option value="Alex"   {{ old('city') == 'Alex' ? 'selected' : '' }}>Alex</option>

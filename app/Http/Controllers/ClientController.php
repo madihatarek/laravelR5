@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Client;
+use App\Models\City;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
@@ -200,6 +201,12 @@ class ClientController extends Controller {
         ];
 
     }
+
+    // public function indexCity() {
+    //     $city = City::get();
+    //     return view( 'clients', compact( 'city' ) );
+
+    // }
 
     
 
