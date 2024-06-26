@@ -6,6 +6,20 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\Mail;
 
+Route::group(
+    [
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){
+    // Your routes
+
+
+
+Route::get('/profile', function () {
+        // ...
+})->middleware('subscribed');
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -137,3 +151,6 @@ Route::post('receiveData',[MyController::class,'receiveData'])->name('receiveFor
 Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+});
