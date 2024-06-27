@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Models\User;
 
 class Expiration extends Command
 {
@@ -11,7 +12,7 @@ class Expiration extends Command
      *
      * @var string
      */
-    protected $signature = 'app:expiration';
+    protected $signature = 'user:expiration';
 
     /**
      * The console command description.
@@ -25,6 +26,9 @@ class Expiration extends Command
      */
     public function handle()
     {
-        //
+        $users = User::where('expired',0)->get();
+        foreach ($users as $user){
+            $user->update(['expired'=>1]);
+        }
     }
 }
